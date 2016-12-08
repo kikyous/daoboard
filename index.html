@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+</head>
+<body>
+  <style>
+    .el-alert {
+        margin: 20px 0 0;
+    }
+  </style>
+  <div id="app">
+    <el-row>
+      <el-col :span="20" push=2 push=2>
+        <el-alert v-for='i in list'
+           :title="i.build.author + ' :  ' + i.build.message"
+           :type=" type(i.build.status) "
+           :description="text(i.build.status) + ' • ' + time(i.build.started_at)"
+           :closable='false'
+           show-icon>
+        </el-alert>
+      </el-col>
+    </el-row>
+  </div>
+</body>
+  <!-- 先引入 Vue -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.wilddog.com/sdk/js/2.3.8/wilddog.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: function(){
+        return { list: [] }
+      },
+      methods: {
+        type: function(t){
+          return {'Pending': 'info', 'Started': 'warning', 'Failure': 'error', 'Success': 'success'}[t];
+        },
+        time: function(t){
+          d = new Date(t);
+          return d.toLocaleString();
+        },
+        text: function(t){
+          return {'Pending': '准备构建', 'Started': '开始构建', 'Failure': '构建失败', 'Success': '构建成功'}[t];
+        }
+      },
+      created: function(){
+        self = this;
+        var config = {
+          syncURL: "https://niwa.wilddogio.com"
+        };
+        wilddog.initializeApp(config);
+        ref = wilddog.sync().ref('/rest/daocloud/webhook');
+        ref.on('child_added', function(data) {
+          self.list.unshift(data.val());
+        });
+      },
+    })
+  </script>
+</html>
