@@ -2,7 +2,7 @@
 
 > VueJS + Wilddog 实时显示daocloud构建状态等webhook消息
 
-![](http://ww3.sinaimg.cn/large/006tNc79jw1fakkgo5urkj31401z4qc9.jpg)
+![](http://ww4.sinaimg.cn/large/006tNc79jw1fakkodajomj30fn0rt41d.jpg)
 
 ## Build Setup
 
