@@ -27,7 +27,7 @@ export default {
     }
     wilddog.initializeApp(config)
     var ref = wilddog.sync().ref('/rest/daocloud/webhook')
-    ref.on('child_added', data => {
+    ref.limitToLast(15).on('child_added', data => {
       self.list.unshift(data.val())
     })
   }
