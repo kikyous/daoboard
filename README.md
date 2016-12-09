@@ -1,6 +1,8 @@
-# dao
+# daoboard
 
-> A Vue.js project
+> VueJS + Wilddog 实时显示daocloud构建状态等webhook消息
+
+![](http://ww3.sinaimg.cn/large/006tNc79jw1fakkgo5urkj31401z4qc9.jpg)
 
 ## Build Setup
 
@@ -14,5 +16,3 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
